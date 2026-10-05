@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="480" viewBox="0 0 900 480">
+<rect width="900" height="480" fill="#f7f7f7"/>
+<text x="450" y="55" text-anchor="middle" font-family="Arial" font-size="30" font-weight="bold">Mapa das primeiras aulas</text>
+<rect x="330" y="95" width="240" height="70" rx="16" fill="#fff" stroke="#333" stroke-width="4"/>
+<text x="450" y="140" text-anchor="middle" font-family="Arial" font-size="25">Python</text>
+<path d="M450 165 V205 M450 205 H170 M450 205 H730" stroke="#333" stroke-width="4"/>
+<rect x="70" y="220" width="200" height="75" rx="16" fill="#fff" stroke="#333" stroke-width="4"/>
+<text x="170" y="267" text-anchor="middle" font-family="Arial" font-size="22">print()</text>
+<rect x="350" y="220" width="200" height="75" rx="16" fill="#fff" stroke="#333" stroke-width="4"/>
+<text x="450" y="267" text-anchor="middle" font-family="Arial" font-size="22">variáveis</text>
+<rect x="630" y="220" width="200" height="75" rx="16" fill="#fff" stroke="#333" stroke-width="4"/>
+<text x="730" y="267" text-anchor="middle" font-family="Arial" font-size="22">input()</text>
+<path d="M170 295 V345 M450 295 V345 M730 295 V345" stroke="#333" stroke-width="4"/>
+<rect x="70" y="355" width="200" height="75" rx="16" fill="#fff" stroke="#333" stroke-width="4"/>
+<text x="170" y="402" text-anchor="middle" font-family="Arial" font-size="22">texto e números</text>
+<rect x="350" y="355" width="200" height="75" rx="16" fill="#fff" stroke="#333" stroke-width="4"/>
+<text x="450" y="402" text-anchor="middle" font-family="Arial" font-size="22">erros</text>
+<rect x="630" y="355" width="200" height="75" rx="16" fill="#fff" stroke="#333" stroke-width="4"/>
+<text x="730" y="402" text-anchor="middle" font-family="Arial" font-size="22">exercícios</text>
+</svg>
