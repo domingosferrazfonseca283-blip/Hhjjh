@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="420" viewBox="0 0 900 420">
+<rect width="900" height="420" fill="#f7f7f7"/>
+<text x="450" y="55" text-anchor="middle" font-family="Arial" font-size="30" font-weight="bold">Uma variável é como uma caixa com etiqueta</text>
+<rect x="110" y="125" width="260" height="190" rx="18" fill="#fff" stroke="#333" stroke-width="4"/>
+<text x="240" y="170" text-anchor="middle" font-family="Arial" font-size="26">nome</text>
+<path d="M165 205 L315 205 L295 285 L185 285 Z" fill="#ddd" stroke="#333" stroke-width="3"/>
+<text x="240" y="255" text-anchor="middle" font-family="Arial" font-size="28">Ana</text>
+<text x="450" y="230" text-anchor="middle" font-family="Arial" font-size="40">=</text>
+<rect x="530" y="125" width="260" height="190" rx="18" fill="#fff" stroke="#333" stroke-width="4"/>
+<text x="660" y="175" text-anchor="middle" font-family="Arial" font-size="24">Python guarda</text>
+<text x="660" y="225" text-anchor="middle" font-family="Arial" font-size="28">nome → "Ana"</text>
+<text x="660" y="270" text-anchor="middle" font-family="Arial" font-size="22">e podemos usar depois</text>
+</svg>
