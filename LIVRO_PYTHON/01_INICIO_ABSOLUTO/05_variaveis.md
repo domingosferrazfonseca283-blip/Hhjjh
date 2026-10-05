@@ -2,6 +2,8 @@
 
 **Autor: Domingos Ferraz Fonseca**
 
+![Diagrama da aula](../../IMAGENS/05_variavel_caixa.svg)
+
 ## 1. O que é uma variável?
 
 Uma variável é como uma pequena caixa com um nome.
