@@ -2,6 +2,8 @@
 
 **Autor: Domingos Ferraz Fonseca**
 
+![Diagrama da aula](../../IMAGENS/08_mapa_revisao.svg)
+
 Esta aula junta as ideias principais das primeiras aulas.
 
 ## 1. O que já aprendemos?
