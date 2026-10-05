@@ -1,0 +1,35 @@
+name: Construir APK do Livro Python
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'APP_ANDROID/**'
+      - 'LIVRO_PYTHON/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Obter código
+        uses: actions/checkout@v4
+      - name: Configurar Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Configurar Android
+        uses: android-actions/setup-android@v3
+      - name: Instalar Gradle
+        uses: gradle/actions/setup-gradle@v4
+      - name: Criar wrapper
+        working-directory: APP_ANDROID
+        run: gradle wrapper --gradle-version 8.10.2
+      - name: Construir APK
+        working-directory: APP_ANDROID
+        run: ./gradlew assembleDebug
+      - name: Guardar APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: LivroPython-debug-apk
+          path: APP_ANDROID/app/build/outputs/apk/debug/app-debug.apk
