@@ -28,8 +28,23 @@ jobs:
       - name: Construir APK
         working-directory: APP_ANDROID
         run: ./gradlew assembleDebug
+      - name: Verificar APK
+        working-directory: APP_ANDROID
+        run: |
+          test -f app/build/outputs/apk/debug/app-debug.apk
+          ls -lh app/build/outputs/apk/debug/app-debug.apk
+      - name: Calcular SHA-256
+        working-directory: APP_ANDROID
+        run: sha256sum app/build/outputs/apk/debug/app-debug.apk > app/build/outputs/apk/debug/LivroPython.apk.sha256
       - name: Guardar APK
         uses: actions/upload-artifact@v4
         with:
-          name: LivroPython-debug-apk
-          path: APP_ANDROID/app/build/outputs/apk/debug/app-debug.apk
+          name: LivroPython-v1.2-debug-apk
+          path: |
+            APP_ANDROID/app/build/outputs/apk/debug/app-debug.apk
+            APP_ANDROID/app/build/outputs/apk/debug/LivroPython.apk.sha256
+      - name: Guardar relatório do build
+        uses: actions/upload-artifact@v4
+        with:
+          name: LivroPython-build-info
+          path: APP_ANDROID/app/build/outputs/apk/debug/LivroPython.apk.sha256
