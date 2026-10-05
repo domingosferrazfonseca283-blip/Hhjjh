@@ -2,6 +2,8 @@
 
 **Autor: Domingos Ferraz Fonseca**
 
+![Diagrama da aula](../../IMAGENS/07_erro_mensagem.svg)
+
 ## 1. Errar faz parte
 
 Quando estamos a aprender Python, vamos encontrar erros.
