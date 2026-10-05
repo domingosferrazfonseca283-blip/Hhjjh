@@ -14,11 +14,12 @@ function showIndex(){
 }
 document.getElementById("homeBtn").onclick=()=>{reader.innerHTML=homeHtml;document.getElementById("topmeta").textContent="Biblioteca offline";window.scrollTo(0,0)};
 document.getElementById("indexBtn").onclick=showIndex;
+window.addEventListener("load",()=>{setTimeout(buildGlobalPageMap,900)});
 const esc=t=>t.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
 function titleOf(f){return f.replace(".md","").replace(/^\d+_/,"").replaceAll("_"," ")}
 function renderMd(t){let s=esc(t.replace(/\r/g,"")),blocks=[];s=s.replace(/~~~([\s\S]*?)~~~/g,(m,c)=>{blocks.push("<pre>"+c.trim()+"</pre>");return "@@CODE"+(blocks.length-1)+"@@";});s=s.replace(/!\[([^\]]*)\]\(([^)]+)\)/g,(m,a,p)=>'<img alt="'+a+'" src="LIVRO_PYTHON/IMAGENS/'+p.split("/").pop()+'">');s=s.replace(/^### (.*)$/gm,"<h3>$1</h3>").replace(/^## (.*)$/gm,"<h2>$1</h2>").replace(/^# (.*)$/gm,"<h1>$1</h1>").replace(/\*\*(.*?)\*\*/g,"<strong>$1</strong>");s=s.replace(/\n\n/g,"</p><p>").replace(/\n/g,"<br>");s="<p>"+s+"</p>";blocks.forEach((b,i)=>s=s.replace("@@CODE"+i+"@@",b));return s}
 function locate(i){let n=0;for(const v of V)for(const f of v[2]){if(n===i)return[v,f];n++}}
-let lessonPages=[],lessonPage=0;
+let lessonPages=[],lessonPage=0,globalOffsets=[],globalTotal=0,globalReady=false,globalBuilding=false;
 function makePages(html){
   const tmp=document.createElement("div");tmp.innerHTML=html;
   const units=[...tmp.children], pages=[];let page=[],score=0;
@@ -35,11 +36,39 @@ function showPage(n){
   lessonPage=Math.max(0,Math.min(n,lessonPages.length-1));
   const body=document.getElementById("pagebody");body.innerHTML="";
   lessonPages[lessonPage].forEach(x=>body.appendChild(x));
-  document.getElementById("pageNo").textContent="Página "+(lessonPage+1)+" de "+lessonPages.length;
+  const localLabel="Página "+(lessonPage+1)+" de "+lessonPages.length;
+  const globalLabel=globalReady && globalOffsets[current]!=null
+    ? " · Livro: página "+(globalOffsets[current]+lessonPage+1)+" de "+globalTotal
+    : "";
+  document.getElementById("pageNo").textContent=localLabel+globalLabel;
   document.getElementById("pPrev").disabled=lessonPage===0;
   document.getElementById("pNext").disabled=lessonPage===lessonPages.length-1;
   document.getElementById("prog").style.width=((lessonPage+1)/lessonPages.length*100)+"%";
   localStorage.setItem("lastPage_"+current,lessonPage);window.scrollTo(0,0);
+}
+async function buildGlobalPageMap(){
+  if(globalReady||globalBuilding)return;
+  globalBuilding=true;
+  try{
+    const cached=JSON.parse(localStorage.getItem("globalPageMap_v1")||"null");
+    if(cached&&Array.isArray(cached.offsets)&&cached.offsets.length===buttons.length&&cached.total){
+      globalOffsets=cached.offsets;globalTotal=cached.total;globalReady=true;showPage(lessonPage);return;
+    }
+    const counts=[];
+    for(let i=0;i<buttons.length;i++){
+      const hit=locate(i),v=hit[0],file=hit[1];
+      const rr=await fetch("LIVRO_PYTHON/"+v[0]+"/"+file);
+      if(!rr.ok)throw new Error("falha ao calcular índice global");
+      counts[i]=makePages(renderMd(await rr.text())).length;
+    }
+    globalOffsets=[];let sum=0;
+    counts.forEach(n=>{globalOffsets.push(sum);sum+=n||1});
+    globalTotal=sum;globalReady=true;
+    localStorage.setItem("globalPageMap_v1",JSON.stringify({offsets:globalOffsets,total:globalTotal}));
+    if(current>=0)showPage(lessonPage);
+  }catch(e){
+    console.warn("Índice global indisponível:",e);
+  }finally{globalBuilding=false}
 }
 async function openLesson(i,save=true){
   const hit=locate(i);if(!hit)return;const[v,file]=hit;current=i;
@@ -55,7 +84,7 @@ async function openLesson(i,save=true){
     document.getElementById("lessonPrev").disabled=i===0;document.getElementById("lessonNext").disabled=i===buttons.length-1;
     document.getElementById("lessonPrev").onclick=()=>openLesson(i-1);document.getElementById("lessonNext").onclick=()=>openLesson(i+1);
     document.getElementById("topmeta").textContent=v[1]+" · Aula "+(v[2].indexOf(file)+1);
-    if(save)localStorage.setItem("lastLesson",i);
+    if(save)localStorage.setItem("lastLesson",i);\n    buildGlobalPageMap();
   }catch(e){document.getElementById("pagebody").innerHTML='<div class="error"><strong>Não foi possível abrir este capítulo.</strong><br>'+esc(e.message)+'</div>'}
 }
 function build(){let n=0;V.forEach(([dir,title,files])=>{const box=document.createElement("section"),h=document.createElement("div");h.className="vol";h.textContent=title;box.appendChild(h);files.forEach(file=>{const b=document.createElement("button");b.className="lesson";b.textContent=titleOf(file);const idx=n++;b.onclick=()=>openLesson(idx);box.appendChild(b);buttons.push(b)});nav.appendChild(box)})}build();
