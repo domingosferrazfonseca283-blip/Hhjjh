@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="pt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#111827">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="styles.css">
+<title>Curso-Livro de Python</title>
+</head>
+<body>
+<header class="top">
+  <div>
+    <div class="eyebrow">DOMINGOS FERRAZ FONSECA</div>
+    <h1>📘 Curso-Livro de Python</h1>
+    <p>Do Zero ao Avançado</p>
+  </div>
+  <button id="install" hidden>📲 Instalar</button>
+</header>
+<div class="layout">
+  <aside>
+    <input id="search" placeholder="🔎 Procurar aula...">
+    <div id="status">A carregar volumes...</div>
+    <nav id="volumes"></nav>
+  </aside>
+  <main>
+    <article id="reader">
+      <h2>Bem-vindo!</h2>
+      <p>Escolha uma aula no menu. O aplicativo lê o conteúdo diretamente do repositório GitHub.</p>
+      <div class="card">17 volumes disponíveis · aulas · exercícios · desafios · diagramas</div>
+    </article>
+  </main>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
