@@ -49,11 +49,30 @@ function getAchievements(){
   ["🚀","Mil XP","Alcançar 1000 XP",xp>=1000]
  ];
 }
+function recordStudyCompletion(i){
+ const today=new Date().toISOString().slice(0,10);
+ const key="study_done_"+today;
+ let done=Number(localStorage.getItem(key)||0);
+ if(localStorage.getItem("study_lesson_"+i)!==today){
+   localStorage.setItem("study_lesson_"+i,today);
+   done++;
+   localStorage.setItem(key,String(done));
+ }
+ localStorage.setItem("study_start",Math.min(i+1,Math.max(0,buttons.length-1)));
+ if(done>=studyToday().goal) markStudy();
+}
+function completeLessonAndStudy(i){
+ localStorage.setItem("completed_"+i,"true");
+ recordStudyCompletion(i);
+ showProgress();
+}
 function getStudyStart(){let x=Number(localStorage.getItem("study_start"));return Number.isInteger(x)&&x>=0&&x<buttons.length?x:0}
 function studyLessons(){const goal=studyToday().goal,start=getStudyStart(),items=[];for(let k=0;k<goal&&start+k<buttons.length;k++)items.push(start+k);return items}
 function studyToday(){
- const today=new Date().toISOString().slice(0,10),done=localStorage.getItem("study_"+today)==="true";
- return {today,done,goal:Number(localStorage.getItem("study_goal")||1)};
+ const d=new Date().toISOString().slice(0,10);
+ const goal=Number(localStorage.getItem("study_goal")||1);
+ const done=Number(localStorage.getItem("study_done_"+d)||0);
+ return {date:d,done:done,goal:goal,complete:done>=goal};
 }
 function markStudy(){
  const s=studyToday();localStorage.setItem("study_"+s.today,"true");addXP(5);showStudyPlan();
