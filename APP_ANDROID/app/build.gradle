@@ -8,12 +8,13 @@ android {
         applicationId 'com.domingosferrazfonseca.livropython'
         minSdk 23
         targetSdk 35
-        versionCode 2
-        versionName '1.1'
+        versionCode 3
+        versionName '1.2'
     }
 }
 
 tasks.register('copyBook', Copy) {
+    doFirst { delete(layout.projectDirectory.dir('src/main/assets/LIVRO_PYTHON')) }
     from(rootProject.file('../LIVRO_PYTHON'))
     into(layout.projectDirectory.dir('src/main/assets/LIVRO_PYTHON'))
     include('**/*.md')
@@ -21,6 +22,18 @@ tasks.register('copyBook', Copy) {
 }
 
 preBuild.dependsOn(copyBook)
+
+tasks.register('verifyBookAssets') {
+    dependsOn(copyBook)
+    doLast {
+        def root = file('src/main/assets/LIVRO_PYTHON')
+        def md = fileTree(root).matching { include '**/*.md' }.files.size()
+        def svg = fileTree(root).matching { include '**/*.svg' }.files.size()
+        if (md == 0 || svg == 0) throw new GradleException("Livro não copiado: markdown=$md svg=$svg")
+        println("Livro incluído no APK: $md ficheiros Markdown e $svg diagramas SVG")
+    }
+}
+preBuild.dependsOn(verifyBookAssets)
 
 dependencies {
     implementation 'androidx.appcompat:appcompat:1.7.0'
