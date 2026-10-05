@@ -1,19 +1,53 @@
-# Python Sem Medo — Do Zero Absoluto ao Python Avançado
+# Python — Do Zero ao Avançado
 
-Curso em português para começar do zero e avançar até Python avançado.
+## 📘 Livro de Python por Domingos Ferraz Fonseca
 
-**Autor:** domingosferrazfonseca283-blip
+Um percurso progressivo de **zero absoluto** até Python avançado, escrito em português simples.
 
-## Livro
+### O que o livro inclui
 
-O livro foi organizado em 1.000 páginas: 250 aulas × 4 páginas.
+- 🟢 Fundamentos desde o primeiro contacto com programação
+- 🧩 Explicações passo a passo
+- 💻 Exemplos de código
+- ✏️ Exercícios em todas as etapas
+- 🖼️ Imagens e esquemas para ajudar a compreender
+- 🛠️ Projetos práticos
+- 🚀 Python avançado e profissional
+- 🧠 Desafios para desenvolver raciocínio de programação
 
-A prioridade é a legibilidade. Uma página física com 1.000 linhas teria texto demasiado pequeno para ensinar bem, sobretudo a um principiante.
+### Regra pedagógica
 
-Cada aula segue: ideia simples → exemplo → explicação linha a linha → erros comuns → exercícios → desafio.
+**Explicar → mostrar → experimentar → errar → corrigir → criar.**
 
-## Percurso
+## Estrutura
 
-Zero absoluto → fundamentos → decisões → ciclos → coleções → funções → ficheiros → módulos → objetos → Python intermédio → Python avançado → tipagem → testes → projetos → performance → concorrência → internals.
+A edição foi planeada para **1.000 páginas**, dividida em aulas curtas e progressivas.
 
-O PDF completo foi preparado como artefacto de download nesta conversa.
+1. Zero absoluto
+2. Fundamentos de Python
+3. Decisões e repetições
+4. Coleções e estruturas de dados
+5. Funções e módulos
+6. Ficheiros e dados
+7. Programação orientada a objetos
+8. Python intermédio
+9. Testes e qualidade
+10. APIs, bases de dados e automação
+11. Concorrência e programação assíncrona
+12. Performance e internals
+13. Projetos profissionais
+14. Projeto final
+
+## Exercícios
+
+Cada aula terá exercícios de três níveis:
+
+- 🟢 Fácil — repetir a ideia com pequenas alterações.
+- 🟡 Médio — combinar ideias.
+- 🔴 Desafio — criar algo novo sem copiar.
+
+Veja [EXERCICIOS.md](EXERCICIOS.md).
+
+## Autor
+
+# **Domingos Ferraz Fonseca**
