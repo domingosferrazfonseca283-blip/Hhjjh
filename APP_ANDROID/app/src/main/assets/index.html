@@ -145,7 +145,7 @@ async function searchBook(q){
  box.hidden=false;box.innerHTML="<div>A pesquisar no conteúdo…</div>";
  const data=[];
  for(let i=0;i<buttons.length;i++){
-  const hit=locate(i),v=hit[0],file=hit[1],rr=await fetch("LIVRO_PYTHON/"+v[0]+"/"+file);
+  const hit=locate(i),v=hit[0],file=hit[1],rr=await fetch("https://appassets.androidplatform.net/assets/LIVRO_PYTHON/"+v[0]+"/"+file);
   if(!rr.ok)continue;
   const raw=await rr.text(),plain=raw.replace(/[#$*~>\[\]()]/g," ").replace(/\s+/g," ");
   data.push({i,text:plain});
@@ -162,7 +162,7 @@ function renderMd(t){
   let s=esc(t.replace(/\r/g,"")),blocks=[];
   s=s.replace(/\`\`\`(?:python|py|text|bash|sh)?\\n([\\s\\S]*?)\`\`\`/gi,(m,c)=>{blocks.push("<pre>"+c.trim()+"</pre>");return "@@CODE"+(blocks.length-1)+"@@"});
   s=s.replace(/~~~(?:python|py|text|bash|sh)?\\n?([\\s\\S]*?)~~~/gi,(m,c)=>{blocks.push("<pre>"+c.trim()+"</pre>");return "@@CODE"+(blocks.length-1)+"@@"});
-  s=s.replace(/!\\[([^\\]]*)\\]\\(([^)]+)\\)/g,(m,a,p)=>'<img alt="'+a+'" src="LIVRO_PYTHON/IMAGENS/'+p.split("/").pop()+'">');
+  s=s.replace(/!\\[([^\\]]*)\\]\\(([^)]+)\\)/g,(m,a,p)=>'<img alt="'+a+'" src="https://appassets.androidplatform.net/assets/LIVRO_PYTHON/IMAGENS/'+p.split("/").pop()+'">');
   s=s.replace(/^### (.*)$/gm,"<h3>$1</h3>").replace(/^## (.*)$/gm,"<h2>$1</h2>").replace(/^# (.*)$/gm,"<h1>$1</h1>");
   s=s.replace(/\\*\\*(.*?)\\*\\*/g,"<strong>$1</strong>").replace(/\\*([^*\\n]+)\\*/g,"<em>$1</em>").replace(/\\`([^\\`]+)\\`/g,"<code>$1</code>");
   const lines=s.split("\n"),out=[];let para=[];
@@ -223,7 +223,7 @@ async function buildGlobalPageMap(){
     const counts=[];
     for(let i=0;i<buttons.length;i++){
       const hit=locate(i),v=hit[0],file=hit[1];
-      const rr=await fetch("LIVRO_PYTHON/"+v[0]+"/"+file);
+      const rr=await fetch("https://appassets.androidplatform.net/assets/LIVRO_PYTHON/"+v[0]+"/"+file);
       if(!rr.ok)throw new Error("falha ao calcular índice global");
       counts[i]=makePages(renderMd(await rr.text())).length;
     }
@@ -248,7 +248,7 @@ function openLesson(i,save=true){
   buttons.forEach(x=>x.classList.remove("active"));buttons[i].classList.add("active");
   reader.innerHTML='<section class="chapterhead"><div class="small">'+v[1]+'</div><h1>'+titleOf(file)+'</h1><p>Aula '+(v[2].indexOf(file)+1)+' de '+v[2].length+' · Assinatura: Domingos Ferraz Fonseca</p><div class="lessonTools"><button id="bookmarkBtn">🔖 Guardar aula</button><button id="completeBtn">☑ Marcar concluída</button><button id="reviewBtn">📝 Revisão</button></div></section><section class="pagebox"><div class="pagebody" id="pagebody"><p>A abrir o capítulo…</p></div><div class="pagefoot"><span id="pageNo">Página 1</span><div class="pagebuttons"><button id="pPrev">← Anterior</button><button id="pNext">Próxima →</button></div></div></section><div class="navbottom"><button id="lessonPrev">← Aula anterior</button><button id="lessonNext">Próxima aula →</button></div>';
   try{
-    const r=await fetch("LIVRO_PYTHON/"+v[0]+"/"+file);if(!r.ok)throw new Error("ficheiro não encontrado");
+    const r=await fetch("https://appassets.androidplatform.net/assets/LIVRO_PYTHON/"+v[0]+"/"+file);if(!r.ok)throw new Error("ficheiro não encontrado");
     lessonPages=makePages(renderMd(await r.text())+renderQuiz(i));
     const saved=Math.min(Number(localStorage.getItem("lastPage_"+i)||0),lessonPages.length-1);
     showPage(saved);activateQuiz(i);
