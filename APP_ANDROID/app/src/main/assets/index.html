@@ -1,9 +1,75 @@
-<!doctype html><html lang="pt"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Curso-Livro de Python</title><style>
-body{font-family:system-ui;margin:0;background:#f5f7fb;color:#172033}.top{background:#111827;color:white;padding:22px}.top h1{margin:4px 0}.layout{display:grid;grid-template-columns:310px 1fr;min-height:100vh}aside{background:white;padding:16px;border-right:1px solid #ddd;overflow:auto}main{padding:24px;max-width:900px}input{width:100%;padding:11px;box-sizing:border-box;border:1px solid #ccd2dc;border-radius:8px}.vol{font-weight:bold;margin-top:15px}.lesson{display:block;width:100%;text-align:left;background:none;border:0;padding:7px;border-radius:6px}.lesson:hover{background:#e9eefc}article{background:white;padding:25px;border-radius:12px;line-height:1.7}pre{background:#111827;color:white;padding:15px;overflow:auto}img{max-width:100%}@media(max-width:800px){.layout{grid-template-columns:1fr}aside{max-height:40vh;border-right:0;border-bottom:1px solid #ddd}}
-</style></head><body><header class="top"><small>DOMINGOS FERRAZ FONSECA</small><h1>📘 Curso-Livro de Python</h1><div>Do Zero ao Avançado · 100% offline</div></header><div class="layout"><aside><input id="q" placeholder="🔎 Procurar aula"><div id="nav">A carregar...</div></aside><main><article id="reader"><h2>Bem-vindo!</h2><p>Escolha uma aula. Todo o conteúdo está dentro do aplicativo.</p></article></main></div><script>
-const V=[["01_INICIO_ABSOLUTO","Volume 1 — Início absoluto"],["02_FUNDAMENTOS","Volume 2 — Fundamentos"],["03_LOGICA_E_DADOS","Volume 3 — Lógica e dados"],["04_FUNCOES","Volume 4 — Funções"],["05_POO","Volume 5 — POO"],["06_MODULOS_FICHEIROS","Volume 6 — Módulos e ficheiros"],["07_APIS_BANCOS_DADOS","Volume 7 — APIs e bases de dados"],["08_TESTES_DEBUG","Volume 8 — Testes e debugging"],["09_PYTHON_AVANCADO","Volume 9 — Python avançado"],["10_PYTHON_PROFISSIONAL","Volume 10 — Python profissional"],["11_PROJETOS_PROFISSIONAIS","Volume 11 — Projetos profissionais"],["12_PROJETOS_AVANCADOS","Volume 12 — Projetos avançados"],["13_ENGENHARIA_SOFTWARE","Volume 13 — Engenharia de software"],["14_DADOS_AUTOMACAO_IA","Volume 14 — Dados, automação e IA"],["15_DESENVOLVIMENTO_WEB","Volume 15 — Desenvolvimento web"],["16_MACHINE_LEARNING","Volume 16 — Machine Learning"],["17_DEEP_LEARNING","Volume 17 — Deep Learning"]];
+<!doctype html>
+<html lang="pt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Curso-Livro de Python</title>
+<style>
+body{font-family:system-ui;margin:0;background:#f5f7fb;color:#172033}
+.top{background:#111827;color:white;padding:22px}.top h1{margin:4px 0}
+.layout{display:grid;grid-template-columns:310px 1fr;min-height:100vh}
+aside{background:white;padding:16px;border-right:1px solid #ddd;overflow:auto}
+main{padding:24px;max-width:900px}input{width:100%;padding:11px;box-sizing:border-box;border:1px solid #ccd2dc;border-radius:8px}
+.vol{font-weight:bold;margin-top:15px;padding:8px 4px}.lesson{display:block;width:100%;text-align:left;background:none;border:0;padding:7px;border-radius:6px}
+.lesson:hover{background:#e9eefc}article{background:white;padding:25px;border-radius:12px;line-height:1.7}
+pre{background:#111827;color:white;padding:15px;overflow:auto;white-space:pre-wrap}
+img{max-width:100%;display:block;margin:18px auto;border-radius:8px}
+.error{padding:16px;background:#fee2e2;border-radius:8px}
+@media(max-width:800px){.layout{grid-template-columns:1fr}aside{max-height:40vh;border-right:0;border-bottom:1px solid #ddd}}
+</style>
+</head>
+<body>
+<header class="top"><small>DOMINGOS FERRAZ FONSECA</small><h1>📘 Curso-Livro de Python</h1><div>Do Zero ao Avançado · 100% offline</div></header>
+<div class="layout"><aside><input id="q" placeholder="🔎 Procurar aula"><div id="nav">A carregar...</div></aside>
+<main><article id="reader"><h2>Bem-vindo!</h2><p>Escolha uma aula. Todo o conteúdo está dentro do aplicativo.</p></article></main></div>
+<script>
+const V=[
+["01_INICIO_ABSOLUTO","Volume 1 — Início absoluto",["01_o_que_e_programacao.md","02_o_que_e_python.md","03_primeiro_programa.md","04_texto_e_numeros.md","05_variaveis.md","06_input_e_saida.md","07_erros_e_mensagens.md","08_revisao_e_exercicios.md"]],
+["02_FUNDAMENTOS","Volume 2 — Fundamentos",["01_tipos_de_dados.md","02_operadores_matematicos.md","03_comparacoes.md","04_if_else.md","05_elif.md","06_operadores_logicos.md","07_condicoes_aninhadas.md","08_while.md","09_for.md","10_revisao_decisoes_ciclos.md"]],
+["03_LOGICA_E_DADOS","Volume 3 — Lógica e dados",["01_listas.md","02_listas_e_for.md","03_metodos_de_listas.md","04_tuplas.md","05_dicionarios.md","06_conjuntos.md","07_comparando_estruturas.md","08_revisao_estruturas.md"]],
+["04_FUNCOES","Volume 4 — Funções",["01_o_que_sao_funcoes.md","02_parametros.md","03_return.md","04_parametros_padrao.md","05_escopo.md","06_funcoes_com_listas.md","07_revisao_funcoes.md"]],
+["05_POO","Volume 5 — POO",["01_classes_e_objetos.md","02_atributos.md","03_init.md","04_metodos.md","05_encapsulamento.md","06_heranca.md","07_polimorfismo.md","08_revisao_poo.md"]],
+["06_MODULOS_FICHEIROS","Volume 6 — Módulos e ficheiros",["01_modulos.md","02_import.md","03_criando_modulos.md","04_arquivos_txt.md","05_open.md","06_csv_json.md","07_pacotes.md","08_revisao_projeto.md"]],
+["07_APIS_BANCOS_DADOS","Volume 7 — APIs e bases de dados",["01_o_que_e_api.md","02_requests.md","03_json_api.md","04_status_erros_api.md","05_sql_basico.md","06_sqlite_python.md","07_crud.md","08_projeto_api_banco.md"]],
+["08_TESTES_DEBUG","Volume 8 — Testes e debugging",["01_erros_sintaxe.md","02_excecoes.md","03_try_except.md","04_finally_raise.md","05_debugging.md","06_testes_unitarios.md","07_assert_e_pytest.md","08_qualidade_projeto.md"]],
+["09_PYTHON_AVANCADO","Volume 9 — Python avançado",["01_list_comprehension.md","02_dict_set_comprehension.md","03_lambda_map_filter.md","04_iteradores.md","05_geradores.md","06_decoradores.md","07_context_managers.md","08_revisao_avancado.md"]],
+["10_PYTHON_PROFISSIONAL","Volume 10 — Python profissional",["01_type_hints.md","02_dataclasses.md","03_ambientes_virtuais.md","04_dependencias.md","05_logging.md","06_concorrencia.md","07_desempenho.md","08_padroes_arquitetura.md"]],
+["11_PROJETOS_PROFISSIONAIS","Volume 11 — Projetos profissionais",["01_planeamento_projeto.md","02_cli.md","03_api_completa.md","04_autenticacao.md","05_configuracao_segredos.md","06_docker_conceito.md","07_ci_cd.md","08_projeto_final.md"]],
+["12_PROJETOS_AVANCADOS","Volume 12 — Projetos avançados",["01_api_com_sqlite.md","02_api_assincrona.md","03_cache.md","04_filtrado_validacao.md","05_seguranca_web.md","06_observabilidade.md","07_perfiling_memoria.md","08_projeto_sistema_completo.md"]],
+["13_ENGENHARIA_SOFTWARE","Volume 13 — Engenharia de software",["01_codigo_limpo.md","02_solid.md","03_design_patterns.md","04_dependencia_inversao.md","05_testes_integracao.md","06_git_profissional.md","07_code_review.md","08_arquitetura_hexagonal.md"]],
+["14_DADOS_AUTOMACAO_IA","Volume 14 — Dados, automação e IA",["01_python_dados.md","02_csv_pandas.md","03_numpy.md","04_visualizacao_dados.md","05_automacao_arquivos.md","06_web_scraping.md","07_ia_python.md","08_projeto_analise_automacao.md"]],
+["15_DESENVOLVIMENTO_WEB","Volume 15 — Desenvolvimento web",["01_web_python.md","02_flask.md","03_rotas_templates.md","04_forms_validacao.md","05_fastapi.md","06_auth_web.md","07_deploy.md","08_projeto_web_completo.md"]],
+["16_MACHINE_LEARNING","Volume 16 — Machine Learning",["01_introducao_ml.md","02_dados_treino_teste.md","03_preprocessamento.md","04_regressao.md","05_classificacao.md","06_metricas_modelos.md","07_pipelines_modelos.md","08_projeto_ml.md"]],
+["17_DEEP_LEARNING","Volume 17 — Deep Learning",["01_redes_neuronais.md","02_pytorch.md","03_ativacao_backprop.md","04_treino_deep_learning.md","05_overfitting_regularizacao.md","06_cnn_imagens.md","07_nlp_transformers.md","08_projeto_deep_learning.md"]]
+];
 const nav=document.getElementById("nav"),reader=document.getElementById("reader"),buttons=[];
-function text(t){return t.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
-function md(t,dir){let s=text(t);s=s.replace(/^# (.*)$/gm,"<h1>$1</h1>").replace(/^## (.*)$/gm,"<h2>$1</h2>").replace(/^### (.*)$/gm,"<h3>$1</h3>").replace(/\*\*(.*?)\*\*/g,"<strong>$1</strong>").replace(/^    (.*)$/gm,"<pre>$1</pre>").replace(/\n\n/g,"</p><p>");return "<p>"+s+"</p>"}
-async function load(){for(const [dir,title] of V){const box=document.createElement("div");box.innerHTML='<div class="vol">'+title+"</div>";const r=await fetch("LIVRO_PYTHON/"+dir+"/");const html=await r.text();const names=[...html.matchAll(/href="([^"]+\.md)"/g)].map(x=>x[1]);for(const file of names){const b=document.createElement("button");b.className="lesson";b.textContent=file.replace(".md","").replace(/^\d+_/,"").replaceAll("_"," ");b.onclick=async()=>{const x=await fetch("LIVRO_PYTHON/"+dir+"/"+file);reader.innerHTML=md(await x.text(),dir);};box.append(b);buttons.push(b)}nav.append(box)}}load().catch(()=>nav.textContent="Não foi possível abrir o conteúdo.");document.getElementById("q").oninput=e=>{const q=e.target.value.toLowerCase();buttons.forEach(b=>b.hidden=q&&!b.textContent.toLowerCase().includes(q))};
-</script></body></html>
+const esc=t=>t.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+function md(t,dir){
+  const lines=t.replace(/\r/g,"").split("\n"), out=[]; let code=false, buf=[];
+  for(const line of lines){
+    if(line.trim().startsWith("~~~")){if(code){out.push("<pre>"+esc(buf.join("\n"))+"</pre>");buf=[];code=false}else code=true;continue}
+    if(code){buf.push(line);continue}
+    let x=esc(line);
+    x=x.replace(/^### (.*)$/,"<h3>$1</h3>").replace(/^## (.*)$/,"<h2>$1</h2>").replace(/^# (.*)$/,"<h1>$1</h1>");
+    x=x.replace(/!\[([^\]]*)\]\(([^)]+)\)/g,(m,a,p)=>"<img alt=\""+a+"\" src=\""+(p.startsWith("http")?p:"LIVRO_PYTHON/IMAGENS/"+p.split("/").pop())+"\">");
+    x=x.replace(/\*\*(.*?)\*\*/g,"<strong>$1</strong>").replace(/\*([^*]+)\*/g,"<em>$1</em>");
+    if(x.trim()) out.push(x); else out.push("<br>");
+  }
+  return out.join("\n");
+}
+function label(file){return file.replace(".md","").replace(/^\d+_/,"").replaceAll("_"," ")}
+function add(){
+  for(const [dir,title,files] of V){
+    const box=document.createElement("div"); box.innerHTML='<div class="vol">'+title+"</div>";
+    for(const file of files){
+      const b=document.createElement("button"); b.className="lesson"; b.textContent=label(file);
+      b.onclick=async()=>{reader.innerHTML="<p>A abrir…</p>";try{const x=await fetch("LIVRO_PYTHON/"+dir+"/"+file);if(!x.ok)throw new Error("HTTP "+x.status);reader.innerHTML=md(await x.text(),dir)}catch(e){reader.innerHTML='<div class="error">Não foi possível abrir esta aula: '+esc(e.message)+"</div>"}};
+      box.appendChild(b); buttons.push(b);
+    }
+    nav.appendChild(box);
+  }
+}
+add();
+document.getElementById("q").oninput=e=>{const q=e.target.value.toLowerCase();buttons.forEach(b=>b.hidden=q&&!b.textContent.toLowerCase().includes(q))};
+</script>
+</body></html>
