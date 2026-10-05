@@ -1,6 +1,6 @@
 # Python Sem Medo — Do Zero Absoluto ao Python Avançado
 
-**Autor:** domingosferrazfonseca283-blip
+**Autor:** Domingos Ferraz Fonseca
 
 ## Estrutura
 
