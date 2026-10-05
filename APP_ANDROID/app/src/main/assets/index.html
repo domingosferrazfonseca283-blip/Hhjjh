@@ -17,7 +17,32 @@ document.getElementById("indexBtn").onclick=showIndex;
 window.addEventListener("load",()=>{setTimeout(buildGlobalPageMap,900)});
 const esc=t=>t.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
 function titleOf(f){return f.replace(".md","").replace(/^\d+_/,"").replaceAll("_"," ")}
-function renderMd(t){let s=esc(t.replace(/\r/g,"")),blocks=[];s=s.replace(/~~~([\s\S]*?)~~~/g,(m,c)=>{blocks.push("<pre>"+c.trim()+"</pre>");return "@@CODE"+(blocks.length-1)+"@@";});s=s.replace(/!\[([^\]]*)\]\(([^)]+)\)/g,(m,a,p)=>'<img alt="'+a+'" src="LIVRO_PYTHON/IMAGENS/'+p.split("/").pop()+'">');s=s.replace(/^### (.*)$/gm,"<h3>$1</h3>").replace(/^## (.*)$/gm,"<h2>$1</h2>").replace(/^# (.*)$/gm,"<h1>$1</h1>").replace(/\*\*(.*?)\*\*/g,"<strong>$1</strong>");s=s.replace(/\n\n/g,"</p><p>").replace(/\n/g,"<br>");s="<p>"+s+"</p>";blocks.forEach((b,i)=>s=s.replace("@@CODE"+i+"@@",b));return s}
+function renderMd(t){
+  let s=esc(t.replace(/\r/g,"")),blocks=[];
+  s=s.replace(/\`\`\`(?:python|py|text|bash|sh)?\\n([\\s\\S]*?)\`\`\`/gi,(m,c)=>{blocks.push("<pre>"+c.trim()+"</pre>");return "@@CODE"+(blocks.length-1)+"@@"});
+  s=s.replace(/~~~(?:python|py|text|bash|sh)?\\n?([\\s\\S]*?)~~~/gi,(m,c)=>{blocks.push("<pre>"+c.trim()+"</pre>");return "@@CODE"+(blocks.length-1)+"@@"});
+  s=s.replace(/!\\[([^\\]]*)\\]\\(([^)]+)\\)/g,(m,a,p)=>'<img alt="'+a+'" src="LIVRO_PYTHON/IMAGENS/'+p.split("/").pop()+'">');
+  s=s.replace(/^### (.*)$/gm,"<h3>$1</h3>").replace(/^## (.*)$/gm,"<h2>$1</h2>").replace(/^# (.*)$/gm,"<h1>$1</h1>");
+  s=s.replace(/\\*\\*(.*?)\\*\\*/g,"<strong>$1</strong>").replace(/\\*([^*\\n]+)\\*/g,"<em>$1</em>").replace(/\\`([^\\`]+)\\`/g,"<code>$1</code>");
+  const lines=s.split("\n"),out=[];let para=[];
+  function flush(){if(para.length){out.push("<p>"+para.join("<br>")+"</p>");para=[]}}
+  let listType=null,list=[];
+  function flushList(){if(!list.length)return;out.push("<"+listType+">"+list.join("")+"</"+listType+">");list=[];listType=null}
+  for(const line of lines){
+    if(/^@@CODE\\d+@@$/.test(line)){flush();flushList();out.push(line);continue}
+    let m=line.match(/^\\s*[-*+]\\s+(.*)$/);
+    if(m){flush();if(listType!=="ul"){flushList();listType="ul"}list.push("<li>"+m[1]+"</li>");continue}
+    m=line.match(/^\\s*\\d+[.)]\\s+(.*)$/);
+    if(m){flush();if(listType!=="ol"){flushList();listType="ol"}list.push("<li>"+m[1]+"</li>");continue}
+    if(!line.trim()){flush();flushList();continue}
+    if(/^<h[123]>/.test(line)){flush();flushList();out.push(line);continue}
+    listType? (flushList(),para.push(line)) : para.push(line);
+  }
+  flush();flushList();
+  s=out.join("");
+  blocks.forEach((b,i)=>s=s.replace("@@CODE"+i+"@@",b));
+  return s||"<p></p>";
+}
 function locate(i){let n=0;for(const v of V)for(const f of v[2]){if(n===i)return[v,f];n++}}
 let lessonPages=[],lessonPage=0,globalOffsets=[],globalTotal=0,globalReady=false,globalBuilding=false;
 function makePages(html){
