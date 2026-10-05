@@ -2,26 +2,28 @@
 <html lang="pt">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Curso-Livro de Python</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Livro Python</title>
 <style>
-body{font-family:system-ui;margin:0;background:#f5f7fb;color:#172033}
-.top{background:#111827;color:white;padding:22px}.top h1{margin:4px 0}
-.layout{display:grid;grid-template-columns:310px 1fr;min-height:100vh}
-aside{background:white;padding:16px;border-right:1px solid #ddd;overflow:auto}
-main{padding:24px;max-width:900px}input{width:100%;padding:11px;box-sizing:border-box;border:1px solid #ccd2dc;border-radius:8px}
-.vol{font-weight:bold;margin-top:15px;padding:8px 4px}.lesson{display:block;width:100%;text-align:left;background:none;border:0;padding:7px;border-radius:6px}
-.lesson:hover{background:#e9eefc}article{background:white;padding:25px;border-radius:12px;line-height:1.7}
-pre{background:#111827;color:white;padding:15px;overflow:auto;white-space:pre-wrap}
-img{max-width:100%;display:block;margin:18px auto;border-radius:8px}
-.error{padding:16px;background:#fee2e2;border-radius:8px}
-@media(max-width:800px){.layout{grid-template-columns:1fr}aside{max-height:40vh;border-right:0;border-bottom:1px solid #ddd}}
+:root{--bg:#f4f7fb;--card:#fff;--ink:#172033;--muted:#667085;--line:#e5e7eb;--accent:#2563eb;--accent2:#eff6ff;--code:#111827}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:var(--bg);color:var(--ink)}
+header{padding:22px 20px 26px;background:linear-gradient(135deg,#0f172a,#1e3a8a);color:white}
+.brand{max-width:1200px;margin:auto}.eyebrow{font-size:12px;letter-spacing:.12em;opacity:.75}.brand h1{font-size:28px;margin:6px 0}.brand p{margin:0;opacity:.85}
+.app{max-width:1200px;margin:auto;display:grid;grid-template-columns:320px 1fr;min-height:calc(100vh - 145px)}
+aside{background:#fff;border-right:1px solid var(--line);padding:16px;overflow:auto}
+.search{position:sticky;top:0;background:#fff;padding-bottom:12px;z-index:2}input{width:100%;padding:12px 14px;border:1px solid #d0d5dd;border-radius:12px;font-size:15px;outline:none}input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent2)}
+.vol{margin:14px 0 6px;font-weight:750;font-size:14px;color:#344054}.lesson{display:block;width:100%;border:0;background:transparent;text-align:left;padding:9px 10px;border-radius:9px;color:#475467;font-size:14px;cursor:pointer}.lesson:hover{background:var(--accent2);color:#1d4ed8}.lesson.active{background:#dbeafe;color:#1d4ed8;font-weight:700}
+main{padding:28px}.reader{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:30px;box-shadow:0 8px 30px rgba(16,24,40,.05);max-width:850px}
+.reader h1{font-size:30px;line-height:1.2;margin-top:0}.reader h2{margin-top:28px}.reader h3{margin-top:22px}.reader p{line-height:1.75}.reader ul,.reader ol{line-height:1.7}.reader img{display:block;max-width:100%;height:auto;margin:24px auto;border:1px solid var(--line);border-radius:12px;background:white}.reader pre{background:var(--code);color:#f8fafc;padding:16px;border-radius:12px;overflow:auto;line-height:1.55}.welcome{text-align:center;padding:50px 15px}.welcome .emoji{font-size:52px}.meta{color:var(--muted);font-size:13px}.error{background:#fef2f2;border:1px solid #fecaca;color:#991b1b;padding:16px;border-radius:12px}
+@media(max-width:850px){.app{display:block}aside{border-right:0;border-bottom:1px solid var(--line);max-height:42vh}.lesson{padding:10px}main{padding:14px}.reader{padding:20px;border-radius:14px}.brand h1{font-size:24px}}
 </style>
 </head>
 <body>
-<header class="top"><small>DOMINGOS FERRAZ FONSECA</small><h1>📘 Curso-Livro de Python</h1><div>Do Zero ao Avançado · 100% offline</div></header>
-<div class="layout"><aside><input id="q" placeholder="🔎 Procurar aula"><div id="nav">A carregar...</div></aside>
-<main><article id="reader"><h2>Bem-vindo!</h2><p>Escolha uma aula. Todo o conteúdo está dentro do aplicativo.</p></article></main></div>
+<header><div class="brand"><div class="eyebrow">DOMINGOS FERRAZ FONSECA</div><h1>📘 Curso-Livro de Python</h1><p>Do zero ao avançado · biblioteca completa · funciona sem Internet</p></div></header>
+<div class="app">
+<aside><div class="search"><input id="q" placeholder="🔎 Procurar uma aula"></div><div id="nav"></div></aside>
+<main><article class="reader" id="reader"><div class="welcome"><div class="emoji">🐍</div><h1>Bem-vindo ao livro!</h1><p>Escolha um volume e depois uma aula no menu.</p><p class="meta">Todo o conteúdo é carregado do próprio aplicativo.</p></div></article></main>
+</div>
 <script>
 const V=[
 ["01_INICIO_ABSOLUTO","Volume 1 — Início absoluto",["01_o_que_e_programacao.md","02_o_que_e_python.md","03_primeiro_programa.md","04_texto_e_numeros.md","05_variaveis.md","06_input_e_saida.md","07_erros_e_mensagens.md","08_revisao_e_exercicios.md"]],
@@ -44,32 +46,27 @@ const V=[
 ];
 const nav=document.getElementById("nav"),reader=document.getElementById("reader"),buttons=[];
 const esc=t=>t.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
-function md(t,dir){
-  const lines=t.replace(/\r/g,"").split("\n"), out=[]; let code=false, buf=[];
-  for(const line of lines){
-    if(line.trim().startsWith("~~~")){if(code){out.push("<pre>"+esc(buf.join("\n"))+"</pre>");buf=[];code=false}else code=true;continue}
-    if(code){buf.push(line);continue}
-    let x=esc(line);
-    x=x.replace(/^### (.*)$/,"<h3>$1</h3>").replace(/^## (.*)$/,"<h2>$1</h2>").replace(/^# (.*)$/,"<h1>$1</h1>");
-    x=x.replace(/!\[([^\]]*)\]\(([^)]+)\)/g,(m,a,p)=>"<img alt=\""+a+"\" src=\""+(p.startsWith("http")?p:"LIVRO_PYTHON/IMAGENS/"+p.split("/").pop())+"\">");
-    x=x.replace(/\*\*(.*?)\*\*/g,"<strong>$1</strong>").replace(/\*([^*]+)\*/g,"<em>$1</em>");
-    if(x.trim()) out.push(x); else out.push("<br>");
-  }
-  return out.join("\n");
+function titleOf(f){return f.replace(".md","").replace(/^\d+_/,"").replaceAll("_"," ")}
+function renderMd(t){
+ let s=esc(t.replace(/\r/g,"")), blocks=[]; s=s.replace(/~~~([\s\S]*?)~~~/g,(m,c)=>{blocks.push("<pre>"+c.trim()+"</pre>");return "@@CODE"+(blocks.length-1)+"@@";});
+ s=s.replace(/!\[([^\]]*)\]\(([^)]+)\)/g,(m,a,p)=>{const file=p.split("/").pop();return '<img alt="'+a+'" src="LIVRO_PYTHON/IMAGENS/'+file+'">';});
+ s=s.replace(/^### (.*)$/gm,"<h3>$1</h3>").replace(/^## (.*)$/gm,"<h2>$1</h2>").replace(/^# (.*)$/gm,"<h1>$1</h1>").replace(/\*\*(.*?)\*\*/g,"<strong>$1</strong>");
+ s=s.replace(/\n\n/g,"</p><p>").replace(/\n/g,"<br>");
+ s="<p>"+s+"</p>";
+ blocks.forEach((b,i)=>s=s.replace("@@CODE"+i+"@@",b));
+ return s;
 }
-function label(file){return file.replace(".md","").replace(/^\d+_/,"").replaceAll("_"," ")}
-function add(){
-  for(const [dir,title,files] of V){
-    const box=document.createElement("div"); box.innerHTML='<div class="vol">'+title+"</div>";
-    for(const file of files){
-      const b=document.createElement("button"); b.className="lesson"; b.textContent=label(file);
-      b.onclick=async()=>{reader.innerHTML="<p>A abrir…</p>";try{const x=await fetch("LIVRO_PYTHON/"+dir+"/"+file);if(!x.ok)throw new Error("HTTP "+x.status);reader.innerHTML=md(await x.text(),dir)}catch(e){reader.innerHTML='<div class="error">Não foi possível abrir esta aula: '+esc(e.message)+"</div>"}};
-      box.appendChild(b); buttons.push(b);
-    }
-    nav.appendChild(box);
-  }
+function build(){
+ V.forEach(([dir,title,files])=>{
+  const box=document.createElement("section"); const h=document.createElement("div");h.className="vol";h.textContent=title;box.appendChild(h);
+  files.forEach(file=>{
+   const b=document.createElement("button");b.className="lesson";b.textContent=titleOf(file);
+   b.onclick=async()=>{buttons.forEach(x=>x.classList.remove("active"));b.classList.add("active");reader.innerHTML="<p>A abrir a aula…</p>";try{const r=await fetch("LIVRO_PYTHON/"+dir+"/"+file);if(!r.ok)throw new Error("ficheiro não encontrado");reader.innerHTML=renderMd(await r.text());}catch(e){reader.innerHTML='<div class="error"><strong>Não foi possível abrir esta aula.</strong><br>'+esc(e.message)+"</div>"}};
+   box.appendChild(b);buttons.push(b);
+  });nav.appendChild(box);
+ });
 }
-add();
-document.getElementById("q").oninput=e=>{const q=e.target.value.toLowerCase();buttons.forEach(b=>b.hidden=q&&!b.textContent.toLowerCase().includes(q))};
+build();
+document.getElementById("q").oninput=e=>{const q=e.target.value.toLowerCase().trim();buttons.forEach(b=>b.hidden=q&&!b.textContent.toLowerCase().includes(q));};
 </script>
 </body></html>
