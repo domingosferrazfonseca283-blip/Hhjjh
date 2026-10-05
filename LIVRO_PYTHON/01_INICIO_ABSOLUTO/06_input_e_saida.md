@@ -2,6 +2,8 @@
 
 **Autor: Domingos Ferraz Fonseca**
 
+![Diagrama da aula](../../IMAGENS/06_input_e_saida.svg)
+
 ## 1. O computador também pode ouvir
 
 Até agora nós mandámos o Python mostrar coisas.
